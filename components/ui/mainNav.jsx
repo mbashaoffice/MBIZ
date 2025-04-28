@@ -31,19 +31,37 @@ export default function MainNav() {
         router.push("/login"); // Redirect to login page
     };
 
+    const handleNavigation = (path) => {
+        if (path === "Home") {
+            router.push("/"); // Redirect to the landing page ("/")
+        } else if (path === "About us") {
+            router.push("/about"); // Redirect to About Us page
+        } else {
+            router.push(`/${path.toLowerCase()}`); // Redirect to other pages based on the item name
+        }
+    };
+
     return (
         <div className="mr-4 hidden gap-2 md:flex">
             {mainNavItems.map((item, index) => (
-                <Button key={index} variant="link">
+                <Button
+                    key={index}
+                    variant="link"
+                    onClick={() => handleNavigation(item)} // Navigate based on the item
+                >
                     {item}
                 </Button>
             ))}
-            
+
             {/* Conditionally render "Projects" and "Dashboard" if logged in */}
             {isLoggedIn && (
                 <>
-                    <Button variant="link">Projects</Button>
-                    <Button variant="link">Dashboard</Button>
+                    <Button variant="link" onClick={() => handleNavigation("Projects")}>
+                        Projects
+                    </Button>
+                    <Button variant="link" onClick={() => handleNavigation("Dashboard")}>
+                        Dashboard
+                    </Button>
                 </>
             )}
 

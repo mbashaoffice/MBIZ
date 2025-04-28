@@ -36,6 +36,17 @@ export default function MobileNav() {
         router.push("/login"); // Redirect to login page
     };
 
+    const handleNavigation = (path) => {
+        if (path === "Home") {
+            router.push("/"); // Redirect to the landing page ("/")
+        } else if (path === "About us") {
+            router.push("/about"); // Redirect to About Us page
+        } else {
+            router.push(`/${path.toLowerCase()}`); // Redirect to other pages based on the item name
+        }
+        setOpen(false); // Close the menu after navigation
+    };
+
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             {/* This button will trigger open the mobile sheet menu */}
@@ -52,9 +63,7 @@ export default function MobileNav() {
                         <Button
                             key={index}
                             variant="link"
-                            onClick={() => {
-                                setOpen(false);
-                            }}
+                            onClick={() => handleNavigation(item)} // Navigate based on the item
                         >
                             {item}
                         </Button>
@@ -65,17 +74,13 @@ export default function MobileNav() {
                         <>
                             <Button
                                 variant="link"
-                                onClick={() => {
-                                    setOpen(false);
-                                }}
+                                onClick={() => handleNavigation("Projects")}
                             >
                                 Projects
                             </Button>
                             <Button
                                 variant="link"
-                                onClick={() => {
-                                    setOpen(false);
-                                }}
+                                onClick={() => handleNavigation("Dashboard")}
                             >
                                 Dashboard
                             </Button>
