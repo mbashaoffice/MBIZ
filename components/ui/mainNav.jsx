@@ -5,7 +5,7 @@ import { signOut, onAuthStateChanged } from "firebase/auth"; // Import Firebase 
 import { auth } from "@/lib/firebase"; // Import your Firebase auth instance
 import { useRouter } from "next/navigation"; // For navigation
 
-const mainNavItems = ["Home", "About us", "Projects", "Dashboard"];
+const mainNavItems = ["Home", "About us"];
 
 export default function MainNav() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,6 +38,15 @@ export default function MainNav() {
                     {item}
                 </Button>
             ))}
+            
+            {/* Conditionally render "Projects" and "Dashboard" if logged in */}
+            {isLoggedIn && (
+                <>
+                    <Button variant="link">Projects</Button>
+                    <Button variant="link">Dashboard</Button>
+                </>
+            )}
+
             {/* Login/Logout Button */}
             {isLoggedIn ? (
                 <Button
