@@ -2,101 +2,120 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="bg-gray-50 text-gray-900 font-sans">
+      <header className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-20">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">
+            Your Dream Gig Starts Here!
+          </h1>
+          <p className="mt-4 text-lg sm:text-xl">
+            Find the perfect gig and take your career to the next level. Whether you're a freelancer or a business, we're here to help you succeed.
+          </p>
+          <div className="mt-6 flex justify-center gap-4">
+            <a
+              className="bg-indigo-700 hover:bg-indigo-800 text-white py-2 px-6 rounded-full text-lg font-semibold"
+              href="#services"
+            >
+              Browse Services
+            </a>
+            <a
+              className="bg-transparent border-2 border-white text-white py-2 px-6 rounded-full text-lg font-semibold"
+              href="#contact"
+            >
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <main className="py-16">
+        <div className="container mx-auto text-center" id="services">
+          <h2 className="text-3xl sm:text-4xl font-bold text-indigo-700 mb-10">
+            Our Premium Services
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div className="bg-white shadow-lg rounded-lg p-6">
+              <Image
+                src="/images/web-design.jpg"
+                alt="Service 1"
+                width={400}
+                height={250}
+                className="rounded-t-lg"
+              />
+              <h3 className="text-xl font-semibold text-indigo-600 mt-4">
+                Custom Web Design
+              </h3>
+              <p className="mt-2 text-gray-600">
+                Get a unique, high-quality website tailored to your business needs.
+              </p>
+              <a
+                href="#"
+                className="text-indigo-600 mt-4 inline-block text-lg font-medium"
+              >
+                Learn More
+              </a>
+            </div>
+            <div className="bg-white shadow-lg rounded-lg p-6">
+              <Image
+                src="/images/seo-optimization.png"
+                alt="Service 2"
+                width={400}
+                height={250}
+                className="rounded-t-lg"
+              />
+              <h3 className="text-xl font-semibold text-indigo-600 mt-4">
+                SEO Optimization
+              </h3>
+              <p className="mt-2 text-gray-600">
+                Improve your website’s visibility and ranking on search engines.
+              </p>
+              <a
+                href="#"
+                className="text-indigo-600 mt-4 inline-block text-lg font-medium"
+              >
+                Learn More
+              </a>
+            </div>
+            <div className="bg-white shadow-lg rounded-lg p-6">
+              <Image
+                src="/images/branding-marketing.png"
+                alt="Service 3"
+                width={400}
+                height={250}
+                className="rounded-t-lg"
+              />
+              <h3 className="text-xl font-semibold text-indigo-600 mt-4">
+                Branding & Marketing
+              </h3>
+              <p className="mt-2 text-gray-600">
+                Create a strong brand identity and expand your reach through effective marketing strategies.
+              </p>
+              <a
+                href="#"
+                className="text-indigo-600 mt-4 inline-block text-lg font-medium"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-gray-900 text-white py-12" id="contact">
+        <div className="container mx-auto text-center">
+          <h3 className="text-3xl sm:text-4xl font-semibold mb-6">
+            Get in Touch with Us
+          </h3>
+          <p className="mb-8 text-lg">
+            Have questions or want to get started? Reach out today and let's work together to create something amazing!
+          </p>
+          <a
+            href="mailto:contact@giglanding.com"
+            className="bg-indigo-700 hover:bg-indigo-800 text-white py-2 px-6 rounded-full text-lg font-semibold"
+          >
+            Send us an Email
+          </a>
+        </div>
       </footer>
     </div>
   );
