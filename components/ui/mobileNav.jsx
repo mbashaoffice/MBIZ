@@ -7,7 +7,7 @@ import { signOut, onAuthStateChanged } from "firebase/auth"; // Import Firebase 
 import { auth } from "@/lib/firebase"; // Import your Firebase auth instance
 import { useRouter } from "next/navigation"; // For navigation
 
-const mobileItems = ["Home", "About us", "Projects", "Dashboard"];
+const mobileItems = ["Home", "About us"];
 
 export default function MobileNav() {
     const [open, setOpen] = useState(false);
@@ -47,6 +47,7 @@ export default function MobileNav() {
 
             <SheetContent side="left">
                 <div className="flex flex-col items-start">
+                    {/* Render common menu items */}
                     {mobileItems.map((item, index) => (
                         <Button
                             key={index}
@@ -58,6 +59,29 @@ export default function MobileNav() {
                             {item}
                         </Button>
                     ))}
+
+                    {/* Render "Projects" and "Dashboard" only if logged in */}
+                    {isLoggedIn && (
+                        <>
+                            <Button
+                                variant="link"
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                Projects
+                            </Button>
+                            <Button
+                                variant="link"
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                Dashboard
+                            </Button>
+                        </>
+                    )}
+
                     {/* Login/Logout Button */}
                     {isLoggedIn ? (
                         <Button
