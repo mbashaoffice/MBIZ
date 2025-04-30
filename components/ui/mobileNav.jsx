@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 const mobileItems = ["Home", "About us"];
 
-export default function MobileNav() {
+function MobileNav() {
     const [open, setOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const router = useRouter();
@@ -41,10 +41,8 @@ export default function MobileNav() {
             router.push("/");
         } else if (path === "About us") {
             router.push("/about");
-        } else if (path === "Spring Test") {
-            router.push("/springTest");
         } else {
-            router.push(`/${path.toLowerCase()}`);
+            router.push(`/${path.toLowerCase().replace(/\s+/g, "")}`);
         }
         setOpen(false);
     };
@@ -58,7 +56,7 @@ export default function MobileNav() {
             </SheetTrigger>
 
             <SheetContent side="left">
-                <div className="flex flex-col items-start">
+                <div className="flex flex-col items-start space-y-2">
                     {mobileItems.map((item, index) => (
                         <Button
                             key={index}
@@ -71,22 +69,13 @@ export default function MobileNav() {
 
                     {isLoggedIn && (
                         <>
-                            <Button
-                                variant="link"
-                                onClick={() => handleNavigation("Projects")}
-                            >
+                            <Button variant="link" onClick={() => handleNavigation("Projects")}>
                                 Projects
                             </Button>
-                            <Button
-                                variant="link"
-                                onClick={() => handleNavigation("Dashboard")}
-                            >
+                            <Button variant="link" onClick={() => handleNavigation("Dashboard")}>
                                 Dashboard
                             </Button>
-                            <Button
-                                variant="link"
-                                onClick={() => handleNavigation("Spring Test")}
-                            >
+                            <Button variant="link" onClick={() => handleNavigation("Spring Test")}>
                                 Spring Test
                             </Button>
                         </>
@@ -114,3 +103,5 @@ export default function MobileNav() {
         </Sheet>
     );
 }
+
+export default MobileNav;

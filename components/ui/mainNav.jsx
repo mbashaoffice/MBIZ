@@ -36,10 +36,8 @@ export default function MainNav() {
             router.push("/");
         } else if (path === "About us") {
             router.push("/about");
-        } else if (path === "Spring Test") {
-            router.push("/springTest");
         } else {
-            router.push(`/${path.toLowerCase()}`);
+            router.push(`/${path.toLowerCase().replace(/\s+/g, "")}`);
         }
     };
 
