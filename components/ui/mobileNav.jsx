@@ -36,7 +36,7 @@ export default function MobileNav() {
         router.push("/login");
     };
 
-    const handleNavigation = (path: string) => {
+    const handleNavigation = (path) => {
         if (path === "Home") {
             router.push("/");
         } else if (path === "About us") {
