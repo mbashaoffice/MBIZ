@@ -1,5 +1,6 @@
 // pages/springTest.js
-import { useState } from 'react';
+"use client";
+import { useState, useEffect } from "react";
 
 export default function SpringTest() {
   const [name, setName] = useState('');
