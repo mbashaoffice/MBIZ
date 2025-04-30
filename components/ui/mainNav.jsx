@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Button } from "./button";
-import { signOut, onAuthStateChanged } from "firebase/auth"; // Import Firebase methods
-import { auth } from "@/lib/firebase"; // Import your Firebase auth instance
-import { useRouter } from "next/navigation"; // For navigation
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
 const mainNavItems = ["Home", "About us"];
 
@@ -13,31 +13,33 @@ export default function MainNav() {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setIsLoggedIn(!!user); // Set logged-in state based on user presence
+            setIsLoggedIn(!!user);
         });
 
-        return () => unsubscribe(); // Cleanup listener on unmount
+        return () => unsubscribe();
     }, []);
 
     const handleLogout = async () => {
         try {
-            await signOut(auth); // Sign out the user
+            await signOut(auth);
         } catch (error) {
             console.error("Error logging out:", error);
         }
     };
 
     const handleLogin = () => {
-        router.push("/login"); // Redirect to login page
+        router.push("/login");
     };
 
     const handleNavigation = (path) => {
         if (path === "Home") {
-            router.push("/"); // Redirect to the landing page ("/")
+            router.push("/");
         } else if (path === "About us") {
-            router.push("/about"); // Redirect to About Us page
+            router.push("/about");
+        } else if (path === "Spring Test") {
+            router.push("/springTest");
         } else {
-            router.push(`/${path.toLowerCase()}`); // Redirect to other pages based on the item name
+            router.push(`/${path.toLowerCase()}`);
         }
     };
 
@@ -47,13 +49,12 @@ export default function MainNav() {
                 <Button
                     key={index}
                     variant="link"
-                    onClick={() => handleNavigation(item)} // Navigate based on the item
+                    onClick={() => handleNavigation(item)}
                 >
                     {item}
                 </Button>
             ))}
 
-            {/* Conditionally render "Projects" and "Dashboard" if logged in */}
             {isLoggedIn && (
                 <>
                     <Button variant="link" onClick={() => handleNavigation("Projects")}>
@@ -62,14 +63,16 @@ export default function MainNav() {
                     <Button variant="link" onClick={() => handleNavigation("Dashboard")}>
                         Dashboard
                     </Button>
+                    <Button variant="link" onClick={() => handleNavigation("Spring Test")}>
+                        Spring Test
+                    </Button>
                 </>
             )}
 
-            {/* Login/Logout Button */}
             {isLoggedIn ? (
                 <Button
                     variant="link"
-                    className="text-red-500" // Optional: Add styling for the logout button
+                    className="text-red-500"
                     onClick={handleLogout}
                 >
                     Logout
@@ -77,7 +80,7 @@ export default function MainNav() {
             ) : (
                 <Button
                     variant="link"
-                    className="text-green-500" // Optional: Add styling for the login button
+                    className="text-green-500"
                     onClick={handleLogin}
                 >
                     Login

@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "./sheet";
 import { Button } from "./button";
 import { Menu as MenuIcon } from "lucide-react";
-import { signOut, onAuthStateChanged } from "firebase/auth"; // Import Firebase methods
-import { auth } from "@/lib/firebase"; // Import your Firebase auth instance
-import { useRouter } from "next/navigation"; // For navigation
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
 const mobileItems = ["Home", "About us"];
 
@@ -16,40 +16,41 @@ export default function MobileNav() {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setIsLoggedIn(!!user); // Update logged-in state
+            setIsLoggedIn(!!user);
         });
 
-        return () => unsubscribe(); // Cleanup listener on unmount
+        return () => unsubscribe();
     }, []);
 
     const handleLogout = async () => {
         try {
-            await signOut(auth); // Sign out the user
-            setOpen(false); // Close the menu
+            await signOut(auth);
+            setOpen(false);
         } catch (error) {
             console.error("Error logging out:", error);
         }
     };
 
     const handleLogin = () => {
-        setOpen(false); // Close the menu
-        router.push("/login"); // Redirect to login page
+        setOpen(false);
+        router.push("/login");
     };
 
-    const handleNavigation = (path) => {
+    const handleNavigation = (path: string) => {
         if (path === "Home") {
-            router.push("/"); // Redirect to the landing page ("/")
+            router.push("/");
         } else if (path === "About us") {
-            router.push("/about"); // Redirect to About Us page
+            router.push("/about");
+        } else if (path === "Spring Test") {
+            router.push("/springTest");
         } else {
-            router.push(`/${path.toLowerCase()}`); // Redirect to other pages based on the item name
+            router.push(`/${path.toLowerCase()}`);
         }
-        setOpen(false); // Close the menu after navigation
+        setOpen(false);
     };
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
-            {/* This button will trigger open the mobile sheet menu */}
             <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
                     <MenuIcon />
@@ -58,18 +59,16 @@ export default function MobileNav() {
 
             <SheetContent side="left">
                 <div className="flex flex-col items-start">
-                    {/* Render common menu items */}
                     {mobileItems.map((item, index) => (
                         <Button
                             key={index}
                             variant="link"
-                            onClick={() => handleNavigation(item)} // Navigate based on the item
+                            onClick={() => handleNavigation(item)}
                         >
                             {item}
                         </Button>
                     ))}
 
-                    {/* Render "Projects" and "Dashboard" only if logged in */}
                     {isLoggedIn && (
                         <>
                             <Button
@@ -84,14 +83,19 @@ export default function MobileNav() {
                             >
                                 Dashboard
                             </Button>
+                            <Button
+                                variant="link"
+                                onClick={() => handleNavigation("Spring Test")}
+                            >
+                                Spring Test
+                            </Button>
                         </>
                     )}
 
-                    {/* Login/Logout Button */}
                     {isLoggedIn ? (
                         <Button
                             variant="link"
-                            className="mt-4 text-red-500" // Optional: Add styling for the logout button
+                            className="mt-4 text-red-500"
                             onClick={handleLogout}
                         >
                             Logout
@@ -99,7 +103,7 @@ export default function MobileNav() {
                     ) : (
                         <Button
                             variant="link"
-                            className="mt-4 text-green-500" // Optional: Add styling for the login button
+                            className="mt-4 text-green-500"
                             onClick={handleLogin}
                         >
                             Login
