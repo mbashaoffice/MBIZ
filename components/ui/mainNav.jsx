@@ -5,7 +5,7 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
-const mainNavItems = ["Home", "About us"];
+const mainNavItems = ["Home", "About us", "Spring Test", "Category"];
 
 export default function MainNav() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,12 +32,13 @@ export default function MainNav() {
     };
 
     const handleNavigation = (path) => {
-        if (path === "Home") {
-            router.push("/");
-        } else if (path === "About us") {
-            router.push("/about");
-        } else {
-            router.push(`/${path.toLowerCase().replace(/\s+/g, "")}`);
+        const normalizedPath = path.toLowerCase().replace(/\s+/g, "");
+        switch (normalizedPath) {
+            case "":
+                router.push("/");
+                break;
+            default:
+                router.push(`/${normalizedPath}`);
         }
     };
 
@@ -60,9 +61,6 @@ export default function MainNav() {
                     </Button>
                     <Button variant="link" onClick={() => handleNavigation("Dashboard")}>
                         Dashboard
-                    </Button>
-                    <Button variant="link" onClick={() => handleNavigation("Spring Test")}>
-                        Spring Test
                     </Button>
                 </>
             )}
