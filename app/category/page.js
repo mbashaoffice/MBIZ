@@ -1,11 +1,32 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function CategoryPage() {
     const [showModal, setShowModal] = useState(false)
     const [categoryName, setCategoryName] = useState("")
     const [loading, setLoading] = useState(false)
+    const [categories, setCategories] = useState([])
+
+    // Fetch categories from the API
+    const fetchCategories = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/api/categories")
+            if (response.ok) {
+                const data = await response.json()
+                setCategories(data)
+            } else {
+                throw new Error("Failed to fetch categories")
+            }
+        } catch (error) {
+            console.error("Error fetching categories:", error)
+        }
+    }
+
+    // Call fetchCategories on page load
+    useEffect(() => {
+        fetchCategories()
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,6 +49,9 @@ export default function CategoryPage() {
                 console.log("Category created successfully")
                 setCategoryName("")  // Clear the input field
                 setShowModal(false)  // Close the modal
+
+                // Fetch updated categories
+                fetchCategories()
             } else {
                 throw new Error("Failed to create category")
             }
@@ -85,6 +109,16 @@ export default function CategoryPage() {
                     </div>
                 </div>
             )}
+
+            <div className="grid grid-cols-3 gap-4 mt-6">
+                {categories.map((category) => (
+                    <div key={category.id} className="bg-white p-4 rounded shadow-md flex justify-center items-center">
+                        <div className="text-center">
+                            <h3 className="text-lg font-semibold">{category.name}</h3>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
