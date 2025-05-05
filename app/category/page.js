@@ -28,14 +28,14 @@ export default function CategoryPage() {
         fetchCategories()
     }, [])
 
-    const handleSubmit = async (e) => { 
+    const handleSubmit = async (e) => {
         e.preventDefault()
         console.log("New Category:", categoryName)
 
         setLoading(true)  // Set loading to true while the request is being processed
 
         try {
-            // Sending the POST request to the API endpoint
+            // Sending the POST request to the API endpoint tesstr
             const response = await fetch("https://mbizgig.onrender.com/api/categories", {
                 method: "POST",
                 headers: {
